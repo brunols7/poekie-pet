@@ -69,7 +69,7 @@ export default function PetAscii() {
         <Text
           style={[
             styles.tear,
-            { top: isAltFrame ? 60 : 70 },
+            { top: isAltFrame ? 63 : 68 },
           ]}
         >
           𓄼𓄼

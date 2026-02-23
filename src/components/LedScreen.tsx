@@ -1,10 +1,12 @@
 import { View, StyleSheet } from 'react-native'
 import PetAscii from './PetAscii'
 import MessageDisplay from './MessageDisplay'
+import MiniStatus from './MiniStatus'
 
 export default function LedScreen() {
   return (
     <View style={styles.screen}>
+      <MiniStatus />
       <PetAscii />
       <MessageDisplay />
     </View>
