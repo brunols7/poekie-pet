@@ -1,22 +1,19 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { clamp } from '../utils/clamp'
 
 type PetState = {
-    hunger: number
-    happiness: number
-    energy: number
-    lastUpdatedAt: number
-    isDead: boolean
+  hunger: number
+  happiness: number
+  energy: number
+  lastUpdatedAt: number
+  isDead: boolean
 
-    feed: () => void
-    play: () => void
-    sleep: () => void
-    updateOverTime: () => void
-}
-
-const clamp = (value: number) => {
-  return Math.max(0, Math.min(100, value))
+  feed: () => void
+  play: () => void
+  sleep: () => void
+  updateOverTime: () => void
 }
 
 export const usePetStore = create<PetState>()(
