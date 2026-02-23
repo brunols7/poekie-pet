@@ -22,7 +22,8 @@ export default function PetAscii() {
 const styles = StyleSheet.create({
   ascii: {
     fontFamily: 'monospace',
-    fontSize: 28,
+    paddingTop: 20,
+    fontSize: 48,
     textAlign: 'center',
     color: '#065f46',
   },

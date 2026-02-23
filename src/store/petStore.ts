@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { clamp } from '../utils/clamp'
+import { PetMood } from '../hooks/usePetMood'
 
 type PetState = {
   hunger: number
@@ -14,6 +15,10 @@ type PetState = {
   play: () => void
   sleep: () => void
   updateOverTime: () => void
+
+  // DEBUG
+  setMoodDebug: (mood: PetMood) => void
+  resetPet: () => void
 }
 
 export const usePetStore = create<PetState>()(
@@ -70,6 +75,61 @@ export const usePetStore = create<PetState>()(
           }
         })
       },
+
+      // 🔥 DEBUG CONTROLS
+      setMoodDebug: (mood) => {
+        switch (mood) {
+          case 'happy':
+            set({
+              hunger: 40,
+              happiness: 80,
+              energy: 80,
+              isDead: false,
+            })
+            break
+          case 'hungry':
+            set({
+              hunger: 95,
+              happiness: 50,
+              energy: 50,
+              isDead: false,
+            })
+            break
+          case 'sleepy':
+            set({
+              hunger: 50,
+              happiness: 50,
+              energy: 10,
+              isDead: false,
+            })
+            break
+          case 'sad':
+            set({
+              hunger: 50,
+              happiness: 10,
+              energy: 50,
+              isDead: false,
+            })
+            break
+          case 'dead':
+            set({
+              hunger: 100,
+              happiness: 0,
+              energy: 0,
+              isDead: true,
+            })
+            break
+        }
+      },
+
+      resetPet: () =>
+        set({
+          hunger: 50,
+          happiness: 50,
+          energy: 50,
+          isDead: false,
+          lastUpdatedAt: Date.now(),
+        }),
     }),
     {
       name: 'pet-storage',

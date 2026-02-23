@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native'
 import LedScreen from './LedScreen'
 import ActionButtons from './ActionButtons'
+import DebugPanel from './DebugPanel'
 
 export default function TamagotchiShell() {
   return (
@@ -8,6 +9,7 @@ export default function TamagotchiShell() {
       <View style={styles.shell}>
         <LedScreen />
         <ActionButtons />
+        {/* <DebugPanel /> */}
       </View>
     </View>
   )
