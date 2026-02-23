@@ -9,7 +9,7 @@ export default function TamagotchiShell() {
       <View style={styles.shell}>
         <LedScreen />
         <ActionButtons />
-        {/* <DebugPanel /> */}
+        <DebugPanel />
       </View>
     </View>
   )

@@ -1,30 +1,120 @@
-import { Text, StyleSheet } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Text, StyleSheet, View } from 'react-native'
 import { usePetMood } from '../hooks/usePetMood'
 
-const ASCII_MAP = {
+const FACE = {
   happy: `( •‿• )`,
   hungry: `( •︵• )`,
-  sleepy: `( -_- ) zZ`,
-  sad: `( T_T )`,
+  sleepy: `( -_- )`,
+  sad: `(˚ ˃̣̣̥⌓˂̣̣̥ )`,
+  dead: `( x_x )`,
+}
+
+const BLINK = {
+  happy: `( -‿- )`,
+  hungry: `( -︵- )`,
+  sleepy: `( -_- )`,
+  sad: `(˚ ˃̣̣̥⌓˂̣̣̥ )`,
   dead: `( x_x )`,
 }
 
 export default function PetAscii() {
   const mood = usePetMood()
+  const [frame, setFrame] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFrame((prev) => prev + 1)
+    }, 800)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const isBlinkFrame = frame % 6 === 0
+  const isAltFrame = frame % 2 === 0
+
+  const getFace = () => {
+    if (mood === 'dead') return FACE.dead
+    if (isBlinkFrame) return BLINK[mood]
+    return FACE[mood]
+  }
+
+  const renderExtra = () => {
+    if (mood === 'sleepy') {
+      return (
+        <Text style={[styles.extra, styles.right]}>
+          {isAltFrame ? 'zZz' : 'ZzZ'}
+        </Text>
+      )
+    }
+
+    if (mood === 'hungry') {
+      return (
+        <Text style={[styles.extra, styles.right]}>
+          {isAltFrame ? '*' : '* *'}
+        </Text>
+      )
+    }
+
+    if (mood === 'happy') {
+      return (
+        <Text style={[styles.extra, styles.right]}>
+          {isAltFrame ? '~' : ''}
+        </Text>
+      )
+    }
+
+    if (mood === 'sad') {
+      return (
+        <Text
+          style={[
+            styles.tear,
+            { top: isAltFrame ? 60 : 70 },
+          ]}
+        >
+          𓄼𓄼
+        </Text>
+      )
+    }
+
+    return null
+  }
 
   return (
-    <Text style={styles.ascii}>
-      {ASCII_MAP[mood]}
-    </Text>
+    <View style={styles.container}>
+      {renderExtra()}
+      <Text style={styles.face}>{getFace()}</Text>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  ascii: {
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 140,
+    width: 260,
+    position: 'relative',
+  },
+  face: {
     fontFamily: 'monospace',
-    paddingTop: 20,
     fontSize: 48,
-    textAlign: 'center',
     color: '#065f46',
+    textAlign: 'center',
+  },
+  extra: {
+    position: 'absolute',
+    top: 0,
+    fontFamily: 'monospace',
+    fontSize: 22,
+    color: '#065f46',
+  },
+  right: {
+    right: 20,
+  },
+  tear: {
+    position: 'absolute',
+    fontSize: 20,
+    left: '65%',
   },
 })
