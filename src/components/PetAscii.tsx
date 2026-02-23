@@ -43,7 +43,7 @@ export default function PetAscii() {
     if (mood === 'sleepy') {
       return (
         <Text style={[styles.extra, styles.right]}>
-          {isAltFrame ? 'zZz' : 'ZzZ'}
+          {isAltFrame ? 'Z 𝗓 ᶻ' : 'ᶻ 𝗓 𐰁'}
         </Text>
       )
     }
