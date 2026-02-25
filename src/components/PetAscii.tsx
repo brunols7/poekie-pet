@@ -3,19 +3,19 @@ import { Text, StyleSheet, View } from 'react-native'
 import { usePetMood } from '../hooks/usePetMood'
 
 const FACE = {
-  happy: `( •‿• )`,
-  hungry: `( •︵• )`,
-  sleepy: `( -_- )`,
-  sad: `(˚ ˃̣̣̥⌓˂̣̣̥ )`,
-  dead: `( x_x )`,
+  sad: '/ᐠ ◞ ᆺ ◟マ',
+  happy: '≽^•⩊•^≼',
+  hungry: 'ฅ^._.^ฅ',
+  sleepy: '/ᐠ - ˕ -マ',
+  dead: '≽^x_x^≼',
 }
 
 const BLINK = {
-  happy: `( -‿- )`,
-  hungry: `( -︵- )`,
-  sleepy: `( -_- )`,
-  sad: `(˚ ˃̣̣̥⌓˂̣̣̥ )`,
-  dead: `( x_x )`,
+  sad: '/ᐠ - ᆺ -マ',
+  happy: '≽^-⩊-^≼',
+  hungry: 'ฅ^-_-^ฅ',
+  sleepy: '/ᐠ - ˕ -マ', 
+  dead: '≽^x_x^≼',     
 }
 
 export default function PetAscii() {
