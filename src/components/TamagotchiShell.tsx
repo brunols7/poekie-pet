@@ -1,17 +1,26 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Pressable } from 'react-native'
 import LedScreen from './LedScreen'
 import ActionButtons from './ActionButtons'
+import { Info } from 'lucide-react-native'
 import DebugPanel from './DebugPanel'
 
 export default function TamagotchiShell() {
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.shell}>
-        <LedScreen />
-        <ActionButtons />
-        <DebugPanel />
+      <View style={styles.wrapper}>
+        <Pressable 
+        style={styles.infoIcon}
+        onPress={() => {
+          console.log('Info button pressed')
+        }}
+        >
+          <Info size={24} color={'#ff90b3'}/>
+        </Pressable>
+        <View style={styles.shell}>
+          <LedScreen />
+          <ActionButtons />
+          {/* <DebugPanel /> */}
+        </View>
       </View>
-    </View>
   )
 }
 
@@ -33,4 +42,10 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 10,
   },
+  infoIcon: {
+    flex: 1,
+    position: 'absolute',
+    right: 10,
+    top: 10
+  }
 })

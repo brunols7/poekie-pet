@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import TamagotchiShell from '../components/TamagotchiShell'
 import { usePetStore } from '../store/petStore'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { StatusBar } from 'expo-status-bar'
 
 export default function Home() {
   const updateOverTime = usePetStore(
@@ -17,5 +19,10 @@ export default function Home() {
     return () => clearInterval(interval)
   }, [])
 
-  return <TamagotchiShell />
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <TamagotchiShell />
+      <StatusBar style='auto'/>
+    </SafeAreaView>
+  );
 }
